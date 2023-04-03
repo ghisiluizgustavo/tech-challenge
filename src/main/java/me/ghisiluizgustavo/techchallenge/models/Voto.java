@@ -1,11 +1,15 @@
-package me.ghisiluizgustavo.techchallenge.model;
+package me.ghisiluizgustavo.techchallenge.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
-import me.ghisiluizgustavo.techchallenge.model.enums.VotoEnum;
+import lombok.ToString;
+import me.ghisiluizgustavo.techchallenge.models.enums.VotoEnum;
+
+import javax.persistence.*;
 
 @Entity
 @Data
+@ToString
 public class Voto {
 
     @Id
@@ -16,5 +20,15 @@ public class Voto {
     private VotoEnum voto;
 
     @ManyToOne
-    private Associado idAssociado;
+    @JoinColumn(name="id_associado", nullable=false)
+    private Associado associado;
+
+    @ManyToOne
+    @JoinColumn(name="id_pauta", nullable=false)
+    private Pauta pauta;
+
+    public Long getIdAssociado(){
+        return this.associado.getId();
+    }
+
 }

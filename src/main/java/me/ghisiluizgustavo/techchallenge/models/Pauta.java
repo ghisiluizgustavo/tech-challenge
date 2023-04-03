@@ -1,25 +1,26 @@
-package me.ghisiluizgustavo.techchallenge.model;
+package me.ghisiluizgustavo.techchallenge.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @Data
 @Entity
+@ToString
 public class Pauta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalTime duracao = LocalTime.of(0, 1);
+    private String titulo;
 
-    @OneToMany
+    @OneToMany(mappedBy = "pauta")
+    private List<Sessao> sessao;
+
+    @OneToMany(mappedBy = "pauta")
     private List<Voto> votos;
-
-
-
 
 }

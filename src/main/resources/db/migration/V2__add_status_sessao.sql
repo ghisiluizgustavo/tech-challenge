@@ -1,0 +1,1 @@
+alter table sessao add column status char(3);
